@@ -78,6 +78,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Perfil</a></li>
+                                    <li><a href="#">Alterar senha</a></li>
                                     <li><a href="#">Configurações</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Sair do sistema</a></li>
@@ -97,8 +98,8 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header"></li>
-                        <li class="treeview">
-                            <a href="<?= site_url('hosl'); ?>">
+                        <li>
+                            <a href="<?= base_url('hosl'); ?>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -118,7 +119,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?= base_url('colaboradores') ?>"><i class="fa fa-circle-o"></i> Colaboradores</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Empresa</a></li>
+                                <li><a href="<?= base_url('unidades') ?>"><i class="fa fa-circle-o"></i> Unidades</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Setores</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
