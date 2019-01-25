@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>HOSL - Sistema Manutenção</title>
+        <title>HOSL - Sistema de Manutenção</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.png') ?>">
@@ -19,11 +19,23 @@
         <link rel="stylesheet" href="<?= base_url('assets/dist/css/AdminLTE.min.css'); ?>">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="<?= base_url('assets/dist/css/skins/_all-skins.min.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/dist/css/skins/_all-skins.css'); ?>">
+        
+        <link rel="stylesheet" href="<?= base_url('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'); ?>">
+        
+        <link rel="stylesheet" href="<?= base_url('assets/bower_components/select2/dist/css/select2.min.css'); ?>">
 
         <script src="<?= base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
         <!-- Bootstrap 3.3.7 -->
         <script src="<?= base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+        
+        <script src="<?= base_url('assets/bower_components/select2/dist/js/select2.full.min.js'); ?>"></script>
+        
+        <script src="<?= base_url('assets/plugins/input-mask/jquery.inputmask.js'); ?>"></script>
+        <script src="<?= base_url('assets/plugins/input-mask/jquery.inputmask.date.extensions.js'); ?>"></script>
+        <script src="<?= base_url('assets/plugins/input-mask/jquery.inputmask.extensions.js'); ?>"></script>
+        
+        <script src="<?= base_url('assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
         <!-- FastClick -->
         <script src="<?= base_url('assets/bower_components/fastclick/lib/fastclick.js'); ?>"></script>
         <!-- AdminLTE App -->
@@ -75,7 +87,7 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Perfil</a></li>
                                     <li><a href="#">Alterar senha</a></li>
@@ -104,7 +116,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= base_url('chamados')?>">
                                 <i class="fa fa-files-o"></i>
                                 <span>Chamados</span>
                             </a>
@@ -120,7 +132,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="<?= base_url('colaboradores') ?>"><i class="fa fa-circle-o"></i> Colaboradores</a></li>
                                 <li><a href="<?= base_url('unidades') ?>"><i class="fa fa-circle-o"></i> Unidades</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Setores</a></li>
+                                <li><a href="<?= base_url('setores') ?>"><i class="fa fa-circle-o"></i> Setores</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
                         </li>

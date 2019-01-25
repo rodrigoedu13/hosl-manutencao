@@ -77,7 +77,7 @@ class Colaboradores extends CI_Controller {
 
         if ($this->colaboradores_model->edit('colaboradores', $data, 'cd_colaborador', $this->input->post('id')) == TRUE) {
             $this->session->set_flashdata('success', 'Registro editado com sucesso!');
-            redirect(base_url() . 'colaboradores/editar/' . $this->input->post('id'));
+            redirect(base_url() . 'colaboradores');
         } else {
             $this->data['custom_error'] = '<div class="form_error"><p>Ocorreu um erro</p></div>';
         }

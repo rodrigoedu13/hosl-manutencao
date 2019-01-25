@@ -43,12 +43,12 @@ class Unidades extends CI_Controller {
 
         if ($id == null) {
             $this->session->set_flashdata('error', 'Erro ao tentar excluir registro.');
-            redirect(site_url() . 'colaboradores');
+            redirect(site_url() . 'unidades');
         }
 
-        $this->colaboradores_model->delete('colaboradores', 'cd_colaborador', $id);
+        $this->unidades_model->delete('unidades', 'cd_unidade', $id);
         $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
-        redirect(site_url() . 'colaboradores');
+        redirect(site_url() . 'unidades');
     }
 
     public function editar() {
@@ -57,25 +57,25 @@ class Unidades extends CI_Controller {
 
         if ($id == null) {
             $this->session->set_flashdata('error', 'Erro ao tentar excluir registro.');
-            redirect(site_url() . 'colaboradores');
+            redirect(site_url() . 'unidades');
         }
 
-        $this->data['results'] = $this->colaboradores_model->getById($id);
+        $this->data['results'] = $this->unidades_model->getById($id);
         $this->load->view('template/header');
-        $this->load->view('colaboradores/editar', $this->data);
+        $this->load->view('unidades/editar', $this->data);
         $this->load->view('template/footer');
     }
 
-    public function editarColaborador() {
+    public function editarUnidade() {
 
         $data = array(
-            'ds_colaborador' => $this->input->post('nomeColaborador'),
-            'tp_ativo' => $this->input->post('tpAtivo')
+            'ds_unidade' => $this->input->post('nomeUnidade')
+            
         );
 
-        if ($this->colaboradores_model->edit('colaboradores', $data, 'cd_colaborador', $this->input->post('id')) == TRUE) {
+        if ($this->unidades_model->edit('unidades', $data, 'cd_unidade', $this->input->post('id')) == TRUE) {
             $this->session->set_flashdata('success', 'Registro editado com sucesso!');
-            redirect(base_url() . 'colaboradores/editar/' . $this->input->post('id'));
+            redirect(base_url() . 'unidades');
         } else {
             $this->data['custom_error'] = '<div class="form_error"><p>Ocorreu um erro</p></div>';
         }

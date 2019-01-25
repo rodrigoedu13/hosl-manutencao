@@ -1060,7 +1060,7 @@
  * ---------
  */
 .skin-red-light .main-header .navbar {
-  background-color: #dd4b39;
+  background-color: #b31918;
 }
 .skin-red-light .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -1086,7 +1086,7 @@
   color: #fff;
 }
 .skin-red-light .main-header .navbar .sidebar-toggle:hover {
-  background-color: #d73925;
+  background-color:  #b31918;
 }
 @media (max-width: 767px) {
   .skin-red-light .main-header .navbar .dropdown-menu li.divider {
@@ -1100,15 +1100,15 @@
   }
 }
 .skin-red-light .main-header .logo {
-  background-color: #dd4b39;
+  background-color:  #b31918;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }
 .skin-red-light .main-header .logo:hover {
-  background-color: #dc4735;
+  background-color:  #b31918;
 }
 .skin-red-light .main-header li.user-header {
-  background-color: #dd4b39;
+  background-color:  #b31918;
 }
 .skin-red-light .content-header {
   background: transparent;

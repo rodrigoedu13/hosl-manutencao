@@ -15,6 +15,22 @@
                 <div class="box-header">
                     <?= anchor(site_url('unidades/criar'), '<i class="fa fa-plus"></i> Adicionar', 'class="btn btn-success"'); ?>
                 </div>
+                <div class="col-lg-12">
+
+                    <?php if ($this->session->flashdata('success') == TRUE) { ?>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <?php echo $this->session->flashdata('success'); ?>
+                        </div>
+                    <?php } ?>
+                    <?php if ($this->session->flashdata('error') == TRUE) { ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-ban"></i> Erro!</h4>
+                            <?php echo $this->session->flashdata('error'); ?>
+                        </div>
+                    <?php } ?>
+                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-striped">
@@ -31,8 +47,8 @@
                                     <td><?= $r->cd_unidade; ?></td>
                                     <td><?= $r->ds_unidade; ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('/unidades/editar/') . $r->cd_unidade; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Colaborador"><i class="fa fa-pencil"></i></a>
-                                        <a href="#modal-excluir" role="button" data-toggle="modal" colaborador="<?= $r->cd_unidade; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Colaborador"><i class="fa fa-trash"></i></a>
+                                        <a href="<?php echo base_url('/unidades/editar/') . $r->cd_unidade; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Unidade"><i class="fa fa-pencil"></i></a>
+                                        <a href="#modal-excluir" role="button" data-toggle="modal" unidade="<?= $r->cd_unidade; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Unidade"><i class="fa fa-trash"></i></a>
                                     </td>
 
                                 </tr>
@@ -62,8 +78,8 @@
                 <h4 class="modal-title">Excluir Colaborador</h4>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="idColaborador" name="id" value="" />
-                <h5 style="text-align: center">Deseja realmente excluir este colaborador?</h5>
+                <input type="hidden" id="idUnidade" name="id" value="" />
+                <h5 style="text-align: center">Deseja realmente excluir esta unidade?</h5>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
@@ -78,8 +94,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(document).on('click', 'a', function (event) {
-            var colaborador = $(this).attr('colaborador');
-            $('#idColaborador').val(colaborador);
+            var unidade = $(this).attr('unidade');
+            $('#idUnidade').val(unidade);
         });
     });
 

@@ -11,9 +11,9 @@ class Unidades_model extends CI_Model {
         return $query->result();
     }
     function getById($id){
-        $this->db->where('cd_colaborador',$id);
+        $this->db->where('cd_unidade',$id);
         $this->db->limit(1);
-        return $this->db->get('colaboradores')->row();
+        return $this->db->get('unidades')->row();
     }
     
     function insert($table,$data){
@@ -49,6 +49,16 @@ class Unidades_model extends CI_Model {
     }
     function count($table) {
         return $this->db->count_all($table);
+    }
+    
+    function getUnidadesDropdown(){
+        $this->db->select('cd_unidade,ds_unidade');
+        $results = $this->db->get('unidades')->result();
+        $list = array();
+        foreach ($results as $result) {
+            $list[$result->cd_unidade] = $result->ds_unidade;
+        }
+        return $list;
     }
     
 }
