@@ -133,7 +133,7 @@
                                 <li><a href="<?= base_url('colaboradores') ?>"><i class="fa fa-circle-o"></i> Colaboradores</a></li>
                                 <li><a href="<?= base_url('unidades') ?>"><i class="fa fa-circle-o"></i> Unidades</a></li>
                                 <li><a href="<?= base_url('setores') ?>"><i class="fa fa-circle-o"></i> Setores</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Usuários</a></li>
+                                <li><a href="<?= base_url('usuarios') ?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
                         </li>
                         <li class="treeview">

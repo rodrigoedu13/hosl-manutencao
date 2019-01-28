@@ -5,9 +5,9 @@ class Hosl extends CI_Controller {
 
 	public function index()
 	{
-//            if( (!session_id()) || (!$this->session->userdata('logado'))){
-//            redirect('hosl/login');
-//        }
+            if( (!session_id()) || (!$this->session->userdata('logado'))){
+            redirect('hosl/login');
+        }
 		$this->load->view('template/header');
 		$this->load->view('template/footer');
 	}
@@ -38,16 +38,16 @@ class Hosl extends CI_Controller {
             echo json_encode($json);
         }
         else {
-            $login = $this->input->post('email');
+            $login = $this->input->post('login');
             $password = $this->input->post('senha');
-            $this->load->model('Mapos_model');
-            $user = $this->Mapos_model->check_credentials($email);
+            $this->load->model('hosl_model');
+            $user = $this->Hosl_model->check_credentials($login);
             if($user){
                 $this->load->library('encryption');
                 $this->encryption->initialize(array('driver' => 'mcrypt'));
                 $password_stored =  $this->encryption->decrypt($user->senha);
                 if($password == $password_stored){
-                    $session_data = array('nome' => $user->nome, 'email' => $user->email, 'id' => $user->idUsuarios,'permissao' => $user->permissoes_id , 'logado' => TRUE);
+                    $session_data = array('nome' => $user->cd_nome, 'id' => $user->cd_usuario, 'logado' => TRUE);
                     $this->session->set_userdata($session_data);
                     $json = array('result' => true);
                     echo json_encode($json);
