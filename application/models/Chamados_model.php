@@ -6,8 +6,10 @@ class Chamados_model extends CI_Model {
     }
       
     function getChamados(){
-//        $this->db->join('unidades','unidades.cd_unidade = setores.unidades_cd_unidade');
-        $this->db->order_by('cd_chamado');
+        $this->db->join('unidades','unidades.cd_unidade = chamados.unidades_cd_unidade');
+        $this->db->join('setores','setores.cd_setor = chamados.setores_cd_setor');
+        $this->db->join('colaboradores','colaboradores.cd_colaborador = chamados.colaboradores_cd_colaborador');
+        $this->db->order_by('cd_chamado', 'desc');
         $query = $this->db->get('chamados');
         return $query->result();
     }
@@ -52,5 +54,7 @@ class Chamados_model extends CI_Model {
     function count($table) {
         return $this->db->count_all($table);
     }
+    
+    
     
 }

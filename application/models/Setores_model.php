@@ -49,8 +49,17 @@ class Setores_model extends CI_Model {
 		
 		return FALSE;        
     }
+    
     function count($table) {
         return $this->db->count_all($table);
     }
+    
+    function getSetoresbyUnidade($id){
+        $this->db->where('unidades_cd_unidade',$id);
+        $this->db->order_by('ds_setor');
+        $query = $this->db->get('setores');
+        return $query;
+    }
+    
     
 }

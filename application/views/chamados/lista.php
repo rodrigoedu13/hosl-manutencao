@@ -41,7 +41,7 @@
                                 <th>Setor</th>
                                 <th>Solicitante</th>
                                 <th>Data de Solicitação</th>
-                                <th>Responsavél</th>
+                                <th>Responsável</th>
                                 <th>Prioridade</th>
                                 <th></th>
                             </tr>
@@ -49,29 +49,35 @@
                         <tbody>
                             <?php
                             foreach ($results as $r):
-
-                                if ($r->dt_cadastro == 0) {
-                                    $dataCadastro = '';
+                                
+                                if ($r->dt_solicitacao == 0) {
+                                    $datasolicitacao = '';
                                 } else {
-                                    $dataCadastro = date(('d/m/Y'), strtotime($r->dt_cadastro));
+                                    $datasolicitacao = date(('d/m/Y'), strtotime($r->dt_solicitacao));
                                 }
                                 ?>
 
                                 <tr>
-                                    <td><?= $r->cd_colaborador; ?></td>
+                                    <td><?= $r->cd_chamado; ?></td>
+                                    <td><?= $r->ds_unidade; ?></td>
+                                    <td><?= $r->ds_setor; ?></td>
+                                    <td><?= $r->ds_nome_solicitante; ?></td>
+                                    <td><?= $datasolicitacao; ?></td>
                                     <td><?= $r->ds_colaborador; ?></td>
-                                    <td><?= $dataCadastro; ?></td>
-                                    <td><?php
-                                        if ($r->tp_ativo == 1) {
-                                            echo 'SIM';
-                                        } else {
-                                            echo 'NÃO';
-                                        }
-                                        ;
-                                        ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('/colaboradores/editar/') . $r->cd_colaborador; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Colaborador"><i class="fa fa-pencil"></i></a>
-                                        <a href="#modal-excluir" role="button" data-toggle="modal" colaborador="<?= $r->cd_colaborador; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Colaborador"><i class="fa fa-trash"></i></a>
+                                    <?php if ($r->tp_prioridade == 1){?>
+                                        <small class="label bg-blue">Baixa</small>
+                                    <?php } ?>
+                                    <?php if ($r->tp_prioridade == 2){?>
+                                        <small class="label bg-yellow">Média</small>
+                                    <?php } ?>
+                                        <?php if ($r->tp_prioridade == 3){?>
+                                        <small class="label bg-red">Alta</small>
+                                    <?php } ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo base_url('/chamados/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
+                                        <a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>
                                     </td>
 
                                 </tr>
@@ -92,17 +98,17 @@
 </div>
 <!-- Modal -->
 <div class="modal modal-danger fade" id="modal-excluir">
-    <form action="<?php echo base_url() ?>colaboradores/excluir" method="post" >
+    <form action="<?php echo base_url() ?>chamados/excluir" method="post" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Excluir Colaborador</h4>
+                    <h4 class="modal-title">Excluir Chamado</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="idColaborador" name="id" value="" />
-                    <h5 style="text-align: center">Deseja realmente excluir este colaborador?</h5>
+                    <input type="hidden" id="idChamado" name="id" value="" />
+                    <h5 style="text-align: center">Deseja realmente excluir este chamado?</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
@@ -117,8 +123,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(document).on('click', 'a', function (event) {
-            var colaborador = $(this).attr('colaborador');
-            $('#idColaborador').val(colaborador);
+            var chamado = $(this).attr('chamado');
+            $('#idChamado').val(chamado);
         });
     });
 

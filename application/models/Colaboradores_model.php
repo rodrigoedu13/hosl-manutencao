@@ -51,4 +51,15 @@ class Colaboradores_model extends CI_Model {
         return $this->db->count_all($table);
     }
     
+    function getColaboradoresDropdown(){
+        $this->db->select('cd_colaborador,ds_colaborador');
+        $this->db->where('tp_ativo','1');
+        $results = $this->db->get('colaboradores')->result();
+        $list = array();
+        foreach ($results as $result) {
+            $list[$result->cd_colaborador] = $result->ds_colaborador;
+        }
+        return $list;
+    }
+    
 }
