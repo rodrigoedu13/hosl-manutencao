@@ -15,7 +15,7 @@ class Usuarios extends CI_Controller {
     }
 
     public function index() {
-        $this->data['results'] = $this->usuarios_model->getUsuarios();
+        $this->data['results'] = $this->usuarios_model->getUsuario();
         $this->load->view('template/header');
         $this->load->view('usuarios/lista', $this->data);
         $this->load->view('template/footer');
@@ -28,25 +28,38 @@ class Usuarios extends CI_Controller {
     }
 
     public function add() {
+        $this->load->library('encryption');
+        $this->encryption->initialize(array('driver' => 'mcrypt'));
 
-        if (($this->input->post('senha')) != ($this->input->post('confSenha'))) {
-            $this->session->set_flashdata('error', 'Senhas diferentes');
-            redirect(site_url('usuarios/criar'));
+        $senha = $this->input->post('senha');
+        $confsenha = $this->input->post('confSenha');
+
+        if ($senha != $confsenha) {
+            $this->session->set_flashdata('error', 'Senhas diferentes!');
+            redirect('usuarios/criar');
         } else {
 
-
-            $data = array(
+            $dados_usuario = array(
                 'cd_usuario' => $this->input->post('codUsuario'),
-                'senha' => password_hash($this->input->post('senha'), PASSWORD_DEFAULT),
+                'senha' => $this->encryption->encrypt($this->input->post('senha')),
                 'ds_nome' => $this->input->post('nomeUsuario'),
-                'sn_ativo' => 1,
+                'sn_ativo' => '1',
                 'dt_criacao' => date('Y-m-d')
             );
 
-            $this->usuarios_model->insert('usuarios', $data);
-            $this->session->set_flashdata('success', 'Registro inserido com sucesso');
-            redirect(site_url('usuarios'));
+            if ($this->usuarios_model->getById($dados_usuario['cd_usuario']) == TRUE) {
+                $this->session->set_flashdata('error', 'Este usuário Já existe no sistema!');
+            } else {
+
+                $status = $this->usuarios_model->insert('usuarios', $dados_usuario);
+                if (!$status) {
+                    $this->session->set_flashdata('error', 'Não foi possível cadastrar esse usuário!');
+                } else {
+                    $this->session->set_flashdata('success', 'Usuário Cadastrado!');
+                }
+            }
         }
+        redirect('usuarios');
     }
 
     public function excluir() {

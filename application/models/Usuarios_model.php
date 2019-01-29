@@ -5,15 +5,15 @@ class Usuarios_model extends CI_Model {
         parent::__construct();
     }
       
-    function getUsuarios(){
+    function getUsuario(){
         $this->db->order_by('cd_usuario');
         $query = $this->db->get('usuarios');
         return $query->result();
     }
     function getById($id){
-        $this->db->where('cd_colaborador',$id);
+        $this->db->where('cd_usuario',$id);
         $this->db->limit(1);
-        return $this->db->get('colaboradores')->row();
+        return $this->db->get('usuarios')->row();
     }
     
     function insert($table,$data){

@@ -93,7 +93,7 @@
                                     <li><a href="#">Alterar senha</a></li>
                                     <li><a href="#">Configurações</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Sair do sistema</a></li>
+                                    <li><a href="<?= base_url('hosl/sair')?>">Sair do sistema</a></li>
                                 </ul>
                             </li>
 

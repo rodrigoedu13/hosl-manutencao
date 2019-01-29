@@ -1,67 +1,75 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Hosl extends CI_Controller {
 
-	public function index()
-	{
-            if( (!session_id()) || (!$this->session->userdata('logado'))){
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('hosl_model', '', true);
+    }
+
+    public function index() {
+        if ((!session_id()) || (!$this->session->userdata('logado'))) {
             redirect('hosl/login');
         }
-		$this->load->view('template/header');
-		$this->load->view('template/footer');
-	}
-        
-        public function login(){
-        
+        $this->load->view('template/header');
+        $this->load->view('template/footer');
+    }
+
+    public function login() {
+
         $this->load->view('hosl/login');
-        
-        }
-        
-        public function sair(){
+//        $this->output->enable_profiler(TRUE);
+    }
+
+    public function sair() {
         $this->session->sess_destroy();
         redirect('hosl/login');
-        }
-        
-        public function verificarLogin(){
-        
-        header('Access-Control-Allow-Origin: '.base_url());
-        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-        header('Access-Control-Max-Age: 1000');
-        header('Access-Control-Allow-Headers: Content-Type');
-        
+    }
+
+    public function validarLogin() {
+
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('cd_usuario','Usuário','required|trim');
-        $this->form_validation->set_rules('senha','Senha','required|trim');
-        if ($this->form_validation->run() == false) {
-            $json = array('result' => false, 'message' => validation_errors());
-            echo json_encode($json);
-        }
-        else {
+        $this->form_validation->set_rules('login', 'Usuário', 'required|xss_clean|trim');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|xss_clean|trim');
+
+        if ($this->form_validation->run() == TRUE) {
+            $this->session->set_flashdata('error', 'Verifique os campos!.');
+            redirect('hosl');
+        } else {
+
             $login = $this->input->post('login');
-            $password = $this->input->post('senha');
-            $this->load->model('hosl_model');
-            $user = $this->Hosl_model->check_credentials($login);
-            if($user){
+            $senha = $this->input->post('senha');
+
+
+            $retorno = $this->hosl_model->check_credentials($login);
+            
+
+            if ($retorno == TRUE) {
+                
+                $senha_enc = $retorno->senha;
                 $this->load->library('encryption');
                 $this->encryption->initialize(array('driver' => 'mcrypt'));
-                $password_stored =  $this->encryption->decrypt($user->senha);
-                if($password == $password_stored){
-                    $session_data = array('nome' => $user->cd_nome, 'id' => $user->cd_usuario, 'logado' => TRUE);
-                    $this->session->set_userdata($session_data);
-                    $json = array('result' => true);
-                    echo json_encode($json);
+                $senha_dec = $this->encryption->decrypt($senha_enc);
+
+                if ($senha == $senha_dec) {
+                    $dados_session = array(
+                        'id' => $retorno->cd_usuario,
+                        'nome' => $retorno->ds_nome,
+                        'logado' => TRUE
+                    );
+                    $this->session->set_userdata($dados_session);
+                    redirect(site_url('hosl'));
+                } else {
+                    $this->session->set_flashdata('error', 'Usuário e senha incorreto!.');
+                    redirect(site_url('hosl'));
                 }
-                else{
-                    $json = array('result' => false, 'message' => 'Os dados de acesso estão incorretos.');
-                    echo json_encode($json);
-                }
-            }
-            else{
-                $json = array('result' => false, 'message' => 'Usuário não encontrado, verifique se suas credenciais estão corretass.');
-                echo json_encode($json);
+            } else {
+                $this->session->set_flashdata('error', 'Usuário e senha incorreto!.');
+                redirect(site_url('hosl'));
             }
         }
-        die();
     }
+
 }

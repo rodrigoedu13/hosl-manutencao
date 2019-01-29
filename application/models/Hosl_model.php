@@ -8,7 +8,7 @@ class Hosl_model extends CI_Model {
     public function check_credentials($login)
     {
         $this->db->where('cd_usuario', $login);
-        $this->db->where('situacao', 1);
+        $this->db->where('sn_ativo', 1);
         $this->db->limit(1);
         return $this->db->get('usuarios')->row();
     }
