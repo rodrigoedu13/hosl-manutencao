@@ -90,7 +90,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Perfil</a></li>
-                                    <li><a href="#">Alterar senha</a></li>
+                                    <li><a href="<?= base_url('auth/change_password')?>">Alterar senha</a></li>
                                     <li><a href="#">Configurações</a></li>
                                     <li class="divider"></li>
                                     <li><a href="<?= base_url('hosl/sair')?>">Sair do sistema</a></li>
@@ -115,11 +115,18 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="<?= base_url('chamados')?>">
+                        <li class="treeview">
+                            <a href="#">
                                 <i class="fa fa-files-o"></i>
                                 <span>Chamados</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<?= base_url('chamados')?>"><i class="fa fa-circle-o"></i> Chamados</a></li>
+                                <li><a href="<?= base_url('chamados/listaFinalizados')?>"><i class="fa fa-circle-o"></i> Chamados Finalizados</a></li>
+                            </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">

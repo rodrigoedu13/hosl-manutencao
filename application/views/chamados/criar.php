@@ -38,7 +38,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome do Solicitante:</label>
-                                    <input type="text" class="form-control" name="nomeSolicitante" required="">
+                                    <input type="text" class="form-control" name="nomeSolicitante" required="" style="text-transform:uppercase">
                                 </div>
                                 <!-- /input-group -->
                             </div>

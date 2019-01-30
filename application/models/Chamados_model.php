@@ -10,6 +10,7 @@ class Chamados_model extends CI_Model {
         $this->db->join('unidades', 'unidades.cd_unidade = chamados.unidades_cd_unidade');
         $this->db->join('setores', 'setores.cd_setor = chamados.setores_cd_setor');
         $this->db->join('colaboradores', 'colaboradores.cd_colaborador = chamados.colaboradores_cd_colaborador');
+        $this->db->where_not_in('tp_status',5);
         $this->db->order_by('cd_chamado','desc');
         if ($limit){
         $this->db->limit($limit, $offset);

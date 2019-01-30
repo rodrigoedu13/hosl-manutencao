@@ -35,23 +35,22 @@
             <!-- /.login-logo -->
             <div class="login-box-body">
                 <p class="login-box-msg">
-                    <?php if ($this->session->flashdata('error') != null) { ?>
+                    <?php if ($message) { ?>
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             
-                            <?php echo $this->session->flashdata('error'); ?>
+                            <?php echo $message;?>
                         </div>
                     <?php } ?>
-                <?php echo validation_errors();?>
                 </p>
 
-                <form action="<?= base_url('hosl/validarLogin') ?>" method="post">
+                <form action="<?= base_url('auth/login') ?>" method="post">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Login" name="login" required="">
+                        <input type="text" class="form-control" placeholder="Login" name="identity" required="">
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Senha" name="senha" required="">
+                        <input type="password" class="form-control" placeholder="Senha" name="password" required="">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -68,7 +67,17 @@
             <!-- /.login-box-body -->
         </div>
         <!-- /.login-box -->
+        <script>
+        $(document).ready(function () {
 
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1000, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+
+    });
+        </script>
         <!-- jQuery 3 -->
         <script src="<?= base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
         <!-- Bootstrap 3.3.7 -->

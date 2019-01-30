@@ -45,7 +45,7 @@ if ($results->dt_resolucao == 0) {
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome do Solicitante:</label>
-                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $results->ds_nome_solicitante; ?>">
+                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $results->ds_nome_solicitante; ?>" style="text-transform:uppercase">
                                     <input type="hidden" value="<?php echo $results->cd_chamado;?>" name="id">
                                 </div>
                                 <!-- /input-group -->

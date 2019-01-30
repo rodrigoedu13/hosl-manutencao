@@ -1,10 +1,10 @@
 <section class="content-header">
     <h1>
-        Chamados
+        Chamados Finalizado
     </h1>
     <ol class="breadcrumb">
         <li><a href="<?= site_url('hosl'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Chamados</li>
+        <li class="active">Chamados Finalizado</li>
 
     </ol>
 </section>

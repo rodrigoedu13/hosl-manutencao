@@ -11,10 +11,6 @@ class Chamados extends CI_Controller {
 //            redirect('mapos/login');
 //        }
         
-
-$this->output->enable_profiler(TRUE);
-
-
         $this->load->model('chamados_model');
     }
 
@@ -60,6 +56,41 @@ $this->output->enable_profiler(TRUE);
         $this->load->view('chamados/lista', $this->data);
         $this->load->view('template/footer');
     }
+    
+    public function listaFinalizados(){
+        $this->load->library('pagination');
+        
+        $config['base_url'] = base_url() . 'chamados/listaFinalizados/';
+        $config['total_rows'] = $this->chamados_model->count('chamados');
+        $config['per_page'] = 10;
+        $config['next_link'] = 'Próxima';
+        $config['prev_link'] = 'Anterior';
+        $config['full_tag_open'] = '<nav aria-label="Page navigation" <ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+        $config['cur_tag_close'] = '</b></a></li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['first_link'] = 'Primeira';
+        $config['last_link'] = 'Última';
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        
+         $this->pagination->initialize($config);
+         
+         
+         
+        $this->data['results'] = $this->chamados_model->getFinalizados('','', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('template/header');
+        $this->load->view('chamados/lista_finalizados', $this->data);
+        $this->load->view('template/footer');
+    }
 
     public function criar() {
         $this->load->model('unidades_model');
@@ -79,7 +110,7 @@ $this->output->enable_profiler(TRUE);
             'dt_resolucao' => $dataresolucao,
             'ds_descricao_chamado' => $this->input->post('descChamado'),
             'ds_observacao' => $this->input->post('descObs'),
-            'ds_nome_solicitante' => $this->input->post('nomeSolicitante'),
+            'ds_nome_solicitante' => strtoupper($this->input->post('nomeSolicitante')),
             'colaboradores_cd_colaborador' => $this->input->post('responsavel'),
             'unidades_cd_unidade' => $this->input->post('unidade'),
             'setores_cd_setor' => $this->input->post('setor'),
@@ -134,7 +165,7 @@ $this->output->enable_profiler(TRUE);
             'dt_resolucao' => $dataresolucao,
             'ds_descricao_chamado' => $this->input->post('descChamado'),
             'ds_observacao' => $this->input->post('descObs'),
-            'ds_nome_solicitante' => $this->input->post('nomeSolicitante'),
+            'ds_nome_solicitante' => strtoupper($this->input->post('nomeSolicitante')),
             'colaboradores_cd_colaborador' => $this->input->post('responsavel'),
             'unidades_cd_unidade' => $this->input->post('unidade'),
             'setores_cd_setor' => $this->input->post('setor'),

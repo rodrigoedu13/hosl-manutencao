@@ -27,39 +27,34 @@ class Usuarios extends CI_Controller {
         $this->load->view('template/footer');
     }
 
-    public function add() {
-        $this->load->library('encryption');
-        $this->encryption->initialize(array('driver' => 'mcrypt'));
-
+    function add() {
+        
         $senha = $this->input->post('senha');
         $confsenha = $this->input->post('confSenha');
 
         if ($senha != $confsenha) {
             $this->session->set_flashdata('error', 'Senhas diferentes!');
-            redirect('usuarios/criar');
+            redirect(site_url() . 'usuarios/criar');
         } else {
 
-            $dados_usuario = array(
+
+            $data = array(
                 'cd_usuario' => $this->input->post('codUsuario'),
-                'senha' => $this->encryption->encrypt($this->input->post('senha')),
+                'senha' => password_hash($this->input->post('senha'), PASSWORD_DEFAULT),
                 'ds_nome' => $this->input->post('nomeUsuario'),
-                'sn_ativo' => '1',
+                'sn_ativo' => 1,
                 'dt_criacao' => date('Y-m-d')
             );
 
-            if ($this->usuarios_model->getById($dados_usuario['cd_usuario']) == TRUE) {
-                $this->session->set_flashdata('error', 'Este usuário Já existe no sistema!');
+            if ($this->usuarios_model->insert('usuarios', $data) == true) {
+                $this->session->set_flashdata('success', 'Usuário cadastrado com sucesso!');
+                redirect(site_url() . 'usuarios');
             } else {
-
-                $status = $this->usuarios_model->insert('usuarios', $dados_usuario);
-                if (!$status) {
-                    $this->session->set_flashdata('error', 'Não foi possível cadastrar esse usuário!');
-                } else {
-                    $this->session->set_flashdata('success', 'Usuário Cadastrado!');
-                }
+                $this->session->set_flashdata('error', 'Erro ao cadastrar usuário!');
+                redirect(site_url() . 'usuarios/criar');
             }
+            redirect(site_url() . 'usuarios');
         }
-        redirect('usuarios');
     }
 
     public function excluir() {
