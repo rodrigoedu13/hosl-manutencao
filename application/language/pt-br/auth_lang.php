@@ -32,6 +32,7 @@ $lang['index_heading']           = 'Usuários';
 $lang['index_subheading']        = 'Abaixo uma lista com os usuários.';
 $lang['index_fname_th']          = 'Nome';
 $lang['index_lname_th']          = 'Sobrenome';
+$lang['index_username_th']       = 'Usuário';
 $lang['index_email_th']          = 'Email';
 $lang['index_groups_th']         = 'Grupos';
 $lang['index_status_th']         = 'Estado';

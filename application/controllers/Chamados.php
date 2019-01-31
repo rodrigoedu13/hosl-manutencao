@@ -7,9 +7,9 @@ class Chamados extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-//        if ((!session_id()) || (!$this->session->userdata('logado'))) {
-//            redirect('mapos/login');
-//        }
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login');
+        }
         
         $this->load->model('chamados_model');
     }

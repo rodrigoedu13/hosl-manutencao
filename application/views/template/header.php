@@ -93,7 +93,7 @@
                                     <li><a href="<?= base_url('auth/change_password')?>">Alterar senha</a></li>
                                     <li><a href="#">Configurações</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="<?= base_url('hosl/sair')?>">Sair do sistema</a></li>
+                                    <li><a href="<?= base_url('auth/logout')?>">Sair do sistema</a></li>
                                 </ul>
                             </li>
 
@@ -140,7 +140,7 @@
                                 <li><a href="<?= base_url('colaboradores') ?>"><i class="fa fa-circle-o"></i> Colaboradores</a></li>
                                 <li><a href="<?= base_url('unidades') ?>"><i class="fa fa-circle-o"></i> Unidades</a></li>
                                 <li><a href="<?= base_url('setores') ?>"><i class="fa fa-circle-o"></i> Setores</a></li>
-                                <li><a href="<?= base_url('usuarios') ?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
+                                <li><a href="<?= base_url('auth/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
                         </li>
                         <li class="treeview">

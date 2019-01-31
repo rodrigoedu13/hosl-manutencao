@@ -7,17 +7,17 @@ class Usuarios extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-//        if ((!session_id()) || (!$this->session->userdata('logado'))) {
-//            redirect('mapos/login');
-//        }
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login');
+        }
 
         $this->load->model('usuarios_model');
     }
 
     public function index() {
-        $this->data['results'] = $this->usuarios_model->getUsuario();
+        
         $this->load->view('template/header');
-        $this->load->view('usuarios/lista', $this->data);
+        $this->load->view('usuarios/criar');
         $this->load->view('template/footer');
     }
 
@@ -28,7 +28,7 @@ class Usuarios extends CI_Controller {
     }
 
     function add() {
-        
+
         $senha = $this->input->post('senha');
         $confsenha = $this->input->post('confSenha');
 
