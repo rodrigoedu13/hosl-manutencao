@@ -13,21 +13,14 @@
         <div class="col-xs-12">
             <div class="box box-danger">
                 <div class="box-header">
-                    <?= anchor(site_url('auth/create_user'), '<i class="fa fa-plus"></i> Adicionar', 'class="btn btn-success"'); ?>
+                    <?= anchor(site_url('auth/create_user'), '<i class="fa fa-plus"></i> Novo Usuário', 'class="btn btn-success"'); ?>
+                    <?= anchor(site_url('auth/create_group'), '<i class="fa fa-plus"></i> Criar Grupo', 'class="btn btn-primary"'); ?>
                 </div>
                 <div class="col-lg-12">
-
-                    <?php if ($this->session->flashdata('success') == TRUE) { ?>
-                        <div class="alert alert-success alert-dismissible">
+                    <?php if ($message) { ?>
+                        <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <?php echo $this->session->flashdata('success'); ?>
-                        </div>
-                    <?php } ?>
-                    <?php if ($this->session->flashdata('error') == TRUE) { ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4><i class="icon fa fa-ban"></i> Erro!</h4>
-                            <?php echo $this->session->flashdata('error'); ?>
+                           <?php echo $message;?>
                         </div>
                     <?php } ?>
                 </div>
@@ -40,8 +33,7 @@
                                 <th><?php echo lang('index_fname_th'); ?></th>
                                 <th><?php echo lang('index_lname_th'); ?></th>
                                 <th><?php echo lang('index_groups_th'); ?></th>
-                                <th><?php echo lang('index_status_th'); ?></th>
-                                <th><?php echo lang('index_action_th'); ?></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,8 +47,15 @@
                                             <?php echo anchor("auth/edit_group/" . $group->id, htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8')); ?><br />
                                         <?php endforeach ?>
                                     </td>
-                                    <td><?php echo ($user->active) ? anchor("auth/deactivate/" . $user->id, lang('index_active_link')) : anchor("auth/activate/" . $user->id, lang('index_inactive_link')); ?></td>
-                                    <td><?php echo anchor("auth/edit_user/" . $user->id, 'Edit'); ?></td>
+                                    
+                                    <td width="15%">
+                                        <?php if ($user->active == 1){?>
+                                        <a href="<?php echo base_url('/auth/deactivate/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Inativar Usuário"><i class="fa fa-ban"></i> Inativar</a>
+                                        <?php }?>
+                                        <?php if ($user->active == 0){?>
+                                        <a href="<?php echo base_url('/auth/activate/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-success" title="Ativar Usuário"><i class="fa fa-check"></i> Ativar</a>
+                                        <?php }?>
+                                        <a href="<?php echo base_url('/auth/edit_user/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Usuário"><i class="fa fa-pencil"></i></a>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -74,35 +73,3 @@
 <!-- /.content -->
 </div>
 <!-- Modal -->
-<div class="modal modal-danger fade" id="modal-excluir">
-    <form action="<?php echo base_url() ?>colaboradores/excluir" method="post" >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Excluir Colaborador</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="idColaborador" name="id" value="" />
-                    <h5 style="text-align: center">Deseja realmente excluir este colaborador?</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-outline">Excluir</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </form>
-    <!-- /.modal-dialog -->
-</div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(document).on('click', 'a', function (event) {
-            var colaborador = $(this).attr('colaborador');
-            $('#idColaborador').val(colaborador);
-        });
-    });
-
-</script>

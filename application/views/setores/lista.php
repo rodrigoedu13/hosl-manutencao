@@ -51,7 +51,13 @@
                                     <td><?= $r->cd_setor; ?></td>
                                     <td><?= $r->ds_setor; ?></td>
                                     <td><?= $r->ds_unidade; ?></td>
-                                    <td><?= $r->tp_ativo; ?></td>
+                                    <td><?php 
+                                    if ($r->tp_ativo == 1){
+                                        echo 'Sim';
+                                    }elseif($r->tp_ativo == 2){
+                                        echo 'Não';
+                                    }
+                                    ?></td>
                                     <td>
                                         <a href="<?php echo base_url('/setores/editar/') . $r->cd_setor; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Colaborador"><i class="fa fa-pencil"></i></a>
                                         <a href="#modal-excluir" role="button" data-toggle="modal" setor="<?= $r->cd_setor; ?>" style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Colaborador"><i class="fa fa-trash"></i></a>

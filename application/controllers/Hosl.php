@@ -11,12 +11,7 @@ class Hosl extends CI_Controller {
             redirect('auth/login');
         }
     }
-    
-    public function sair(){
-
-        $this->ion_auth->logout();
-        
-    }
+   
 
     public function index() {
 

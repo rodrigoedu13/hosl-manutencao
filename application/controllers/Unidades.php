@@ -46,9 +46,14 @@ class Unidades extends CI_Controller {
             redirect(site_url() . 'unidades');
         }
 
-        $this->unidades_model->delete('unidades', 'cd_unidade', $id);
-        $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
-        redirect(site_url() . 'unidades');
+        if ($this->unidades_model->getUnidadeBySetor($id) == TRUE) {
+            $this->session->set_flashdata('error', 'Não é possível excluir, essa unidade possui setor vinculado!');
+            redirect(site_url() . 'unidades');
+        } else {
+            $this->unidades_model->delete('unidades', 'cd_unidade', $id);
+            $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
+            redirect(site_url() . 'unidades');
+        }
     }
 
     public function editar() {

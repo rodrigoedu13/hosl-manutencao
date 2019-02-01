@@ -16,6 +16,12 @@ class Colaboradores_model extends CI_Model {
         return $this->db->get('colaboradores')->row();
     }
     
+    function getColaboradorByOs($id){
+        $this->db->where('colaboradores_cd_colaborador',$id);
+        $this->db->limit(1);
+        return $this->db->get('chamados')->row();
+    }
+    
     function insert($table,$data){
         $this->db->insert($table, $data);         
         if ($this->db->affected_rows() == '1')

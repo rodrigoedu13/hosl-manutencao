@@ -48,9 +48,14 @@ class Colaboradores extends CI_Controller {
             redirect(site_url() . 'colaboradores');
         }
 
-        $this->colaboradores_model->delete('colaboradores', 'cd_colaborador', $id);
-        $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
-        redirect(site_url() . 'colaboradores');
+        if ($this->colaboradores_model->getColaboradorByOs($id) == TRUE) {
+            $this->session->set_flashdata('error', 'Não é possível excluir, esse colaborador esta vinculado a um chamado!');
+            redirect(site_url() . 'colaboradores');
+        } else {
+            $this->colaboradores_model->delete('colaboradores', 'cd_colaborador', $id);
+            $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
+            redirect(site_url() . 'colaboradores');
+        }
     }
 
     public function editar() {

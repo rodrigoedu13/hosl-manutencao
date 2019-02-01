@@ -178,8 +178,11 @@ class Auth extends CI_Controller
 			];
 
 			// render
+                        $this->load->view('template/header');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'change_password', $this->data);
-		}
+                        $this->load->view('template/footer');
+                        
+                }
 		else
 		{
 			$identity = $this->session->userdata('identity');
@@ -431,8 +434,10 @@ class Auth extends CI_Controller
 			// insert csrf check
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
-
+                        
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'header');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'deactivate_user', $this->data);
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'footer');
 		}
 		else
 		{
@@ -564,8 +569,10 @@ class Auth extends CI_Controller
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
-
+                        
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'header');
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'footer');
 		}
 	}
 	/**
@@ -603,7 +610,7 @@ class Auth extends CI_Controller
 		// validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
+		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim');
 		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim|required');
 
 		if (isset($_POST) && !empty($_POST))
@@ -719,8 +726,10 @@ class Auth extends CI_Controller
 			'id'   => 'password_confirm',
 			'type' => 'password'
 		];
-
+                
+                $this->load->view('template'. DIRECTORY_SEPARATOR . 'header');
 		$this->_render_page('auth/edit_user', $this->data);
+                $this->load->view('template'. DIRECTORY_SEPARATOR . 'footer');
 	}
 
 	/**
@@ -767,8 +776,10 @@ class Auth extends CI_Controller
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('description'),
 			];
-
+                        
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'header');
 			$this->_render_page('auth/create_group', $this->data);
+                        $this->load->view('template'. DIRECTORY_SEPARATOR . 'footer');
 		}
 	}
 
@@ -796,6 +807,7 @@ class Auth extends CI_Controller
 
 		// validate form input
 		$this->form_validation->set_rules('group_name', $this->lang->line('edit_group_validation_name_label'), 'required|alpha_dash');
+		
 
 		if (isset($_POST) && !empty($_POST))
 		{
@@ -836,8 +848,10 @@ class Auth extends CI_Controller
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
-
+                
+                $this->load->view('template'. DIRECTORY_SEPARATOR . 'header');
 		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
+                $this->load->view('template'. DIRECTORY_SEPARATOR . 'footer');
 	}
 
 	/**

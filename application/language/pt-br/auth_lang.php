@@ -108,7 +108,7 @@ $lang['create_group_validation_desc_label']  = 'Descrição';
 // Edit Group
 $lang['edit_group_title']                  = 'Editar Grupo';
 $lang['edit_group_saved']                  = 'Grupo Salvo';
-$lang['edit_group_heading']                = 'Editar Group';
+$lang['edit_group_heading']                = 'Editar Grupo';
 $lang['edit_group_subheading']             = 'Por favor informe os dados sobre o grupo abaixo.';
 $lang['edit_group_name_label']             = 'Nome:';
 $lang['edit_group_desc_label']             = 'Descrição:';

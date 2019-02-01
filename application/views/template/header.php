@@ -89,9 +89,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Perfil</a></li>
                                     <li><a href="<?= base_url('auth/change_password')?>">Alterar senha</a></li>
-                                    <li><a href="#">Configurações</a></li>
+                                    <!--<li><a href="#">Configurações</a></li>-->
                                     <li class="divider"></li>
                                     <li><a href="<?= base_url('auth/logout')?>">Sair do sistema</a></li>
                                 </ul>
@@ -128,6 +127,7 @@
                                 <li><a href="<?= base_url('chamados/listaFinalizados')?>"><i class="fa fa-circle-o"></i> Chamados Finalizados</a></li>
                             </ul>
                         </li>
+                        <?php if ($this->ion_auth->is_admin()){ ?>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-table"></i>
@@ -143,6 +143,7 @@
                                 <li><a href="<?= base_url('auth/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
                         </li>
+                        <?php } ?>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-book"></i>

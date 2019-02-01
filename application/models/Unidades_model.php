@@ -16,6 +16,12 @@ class Unidades_model extends CI_Model {
         return $this->db->get('unidades')->row();
     }
     
+    function getUnidadeBySetor($id){
+        $this->db->where('unidades_cd_unidade',$id);
+        $this->db->limit(1);
+        return $this->db->get('setores')->row();
+    }
+    
     function insert($table,$data){
         $this->db->insert($table, $data);         
         if ($this->db->affected_rows() == '1')

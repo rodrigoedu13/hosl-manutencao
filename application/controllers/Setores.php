@@ -50,9 +50,14 @@ class Setores extends CI_Controller {
             redirect(site_url() . 'unidades');
         }
 
-        $this->setores_model->delete('setores', 'cd_setor', $id);
-        $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
-        redirect(site_url() . 'setores');
+        if ($this->setores_model->getOsBySetor($id) == true) {
+            $this->session->set_flashdata('error', 'Não é possível excluir, existe chamado vinculado a este setor!');
+            redirect(site_url() . 'setores');
+        } else {
+            $this->setores_model->delete('setores', 'cd_setor', $id);
+            $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
+            redirect(site_url() . 'setores');
+        }
     }
 
     public function editar() {
