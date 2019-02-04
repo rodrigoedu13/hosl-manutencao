@@ -1,10 +1,10 @@
 <section class="content-header">
     <h1>
-        Chamados
+        Meus Chamados
     </h1>
     <ol class="breadcrumb">
         <li><a href="<?= site_url('hosl'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Chamados</li>
+        <li class="active">Meus Chamados</li>
 
     </ol>
 </section>
@@ -12,13 +12,10 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-danger">
-                <form action="<?= base_url('chamados/gerenciar') ?>" method="get">
+                <form action="<?= base_url('mine/gerenciar') ?>" method="get">
                     <div class="box-header">
                         <div class="col-md-2">
-                            <?= anchor(site_url('chamados/criar'), '<i class="fa fa-plus"></i> Novo Chamado', 'class="btn btn-success"'); ?>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="PnomeSolicit" placeholder="Pesquisar nome solicitante" style="text-transform:uppercase">
+                            <?= anchor(site_url('mine/criar'), '<i class="fa fa-plus"></i> Novo Chamado', 'class="btn btn-success"'); ?>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
@@ -86,6 +83,7 @@
                                     <th>Setor</th>
                                     <th>Solicitante</th>
                                     <th>Data de Solicitação</th>
+                                    <th>Hora</th>
                                     <th>Responsável</th>
                                     <th>Prioridade</th>
                                     <th>Status</th>
@@ -107,6 +105,7 @@
                                     <th>Setor</th>
                                     <th>Solicitante</th>
                                     <th>Data de Solicitação</th>
+                                    <th>Hora</th>
                                     <th>Responsável</th>
                                     <th>Prioridade</th>
                                     <th>Status</th>
@@ -128,8 +127,9 @@
                                         <td><?= $r->cd_chamado; ?></td>
                                         <td><?= $r->ds_unidade; ?></td>
                                         <td><?= $r->ds_setor; ?></td>
-                                        <td><?= $r->ds_nome_solicitante; ?></td>
+                                        <td><?= $r->first_name.' '.$r->last_name; ?></td>
                                         <td><?= $datasolicitacao; ?></td>
+                                        <td><?= $r->tp_hora; ?></td>
                                         <td><?= $r->ds_colaborador; ?></td>
                                         <td>
                                             <?php if ($r->tp_prioridade == 1) { ?>
@@ -161,7 +161,7 @@
                                         </td>
                                         <td width="13%">
                                             <a href="#modal-visualizar" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>" descChamado="<?= $r->ds_descricao_chamado; ?>" descObs="<?= $r->ds_observacao; ?>" style="margin-right: 1%" class="btn btn-sm btn-info visualizar" title="Visualizar Chamado"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo base_url('/chamados/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
+                                            <a href="<?php echo base_url('/mine/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
                                             <a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>"  style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>
                                         </td>
 

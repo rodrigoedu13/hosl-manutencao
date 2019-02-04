@@ -184,7 +184,7 @@ class Chamados extends CI_Controller {
     function buscaSetorbyUnidade(){
         $this->load->model('setores_model');
         $id = $this->input->post('id_unidade');
-        $option = "<option value = ' '>Selecione o setor...</option>";
+        $option = "<option value = ''>Selecione o setor...</option>";
         $setor = $this->setores_model->getSetoresbyUnidade($id);
         foreach ($setor->result() as $linha) {
             $option .= "<option value='$linha->cd_setor'>$linha->ds_setor</option>";

@@ -109,11 +109,21 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header"></li>
+                        <?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('usuarios')){ ?>
                         <li>
                             <a href="<?= base_url('hosl'); ?>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('solicitante')){ ?>
+                        <li>
+                            <a href="<?= base_url('mine'); ?>">
+                                <i class="fa fa-file-o"></i> <span>Meus Chamados</span>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        <?php if ($this->ion_auth->is_admin() || $this->ion_auth->in_group('usuarios')){ ?>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-files-o"></i>
@@ -127,6 +137,7 @@
                                 <li><a href="<?= base_url('chamados/listaFinalizados')?>"><i class="fa fa-circle-o"></i> Chamados Finalizados</a></li>
                             </ul>
                         </li>
+                        <?php } ?>
                         <?php if ($this->ion_auth->is_admin()){ ?>
                         <li class="treeview">
                             <a href="#">

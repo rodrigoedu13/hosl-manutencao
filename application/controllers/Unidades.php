@@ -29,7 +29,7 @@ class Unidades extends CI_Controller {
 
     public function add() {
         $data = array(
-            'ds_unidade' => $this->input->post('nomeUnidade')   
+            'ds_unidade' => strtoupper($this->input->post('nomeUnidade'))   
         );
 
         $this->unidades_model->insert('unidades', $data);
@@ -61,7 +61,7 @@ class Unidades extends CI_Controller {
         $id = $this->uri->segment(3);
 
         if ($id == null) {
-            $this->session->set_flashdata('error', 'Erro ao tentar excluir registro.');
+            $this->session->set_flashdata('error', 'Erro ao tentar editar registro.');
             redirect(site_url() . 'unidades');
         }
 
@@ -74,7 +74,7 @@ class Unidades extends CI_Controller {
     public function editarUnidade() {
 
         $data = array(
-            'ds_unidade' => $this->input->post('nomeUnidade')
+            'ds_unidade' => strtoupper($this->input->post('nomeUnidade'))
             
         );
 

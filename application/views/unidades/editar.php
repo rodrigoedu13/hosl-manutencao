@@ -20,7 +20,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome do Colaborador:</label>
-                                <input type="text" class="form-control" name="nomeUnidade" value="<?php echo $results->ds_unidade;?>">
+                                <input type="text" class="form-control" name="nomeUnidade" value="<?php echo $results->ds_unidade;?>" style="text-transform:uppercase">
                                 <input type="hidden" value="<?php echo $results->cd_unidade;?>" name="id">
                             </div>
                             <!-- /input-group -->
