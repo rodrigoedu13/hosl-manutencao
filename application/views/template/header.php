@@ -154,9 +154,8 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por período</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Empresa</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Setores</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Usuários</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por responsável</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por unidade</a></li>
                             </ul>
                         </li>
 
