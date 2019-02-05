@@ -49,9 +49,10 @@ class Chamados extends CI_Controller {
         
          $this->pagination->initialize($config);
          
-         
-         
+         $this->load->model('status_model');
+        $this->data['usuario'] = $this->ion_auth->user()->row(); 
         $this->data['results'] = $this->chamados_model->get('','', $config['per_page'], $this->uri->segment(3));
+        $this->data['status'] = $this->status_model->getStatusDropdown();
         $this->load->view('template/header');
         $this->load->view('chamados/lista', $this->data);
         $this->load->view('template/footer');
@@ -85,8 +86,9 @@ class Chamados extends CI_Controller {
          $this->pagination->initialize($config);
          
          
-         
+        $this->load->model('status_model');
         $this->data['results'] = $this->chamados_model->getFinalizados('','', $config['per_page'], $this->uri->segment(3));
+        $this->data['status'] = $this->status_model->getStatusDropdown();
         $this->load->view('template/header');
         $this->load->view('chamados/lista_finalizados', $this->data);
         $this->load->view('template/footer');
@@ -97,24 +99,27 @@ class Chamados extends CI_Controller {
         $this->load->model('colaboradores_model');
         $this->data['unidades'] = $this->unidades_model->getUnidadesDropdown();
         $this->data['colaboradores'] = $this->colaboradores_model->getColaboradoresDropdown();
+        $this->data['usuario'] = $this->ion_auth->user()->row();
         $this->load->view('template/header');
         $this->load->view('chamados/criar', $this->data);
         $this->load->view('template/footer');
     }
 
     public function add() {
+        $user = $this->ion_auth->user()->row();
+        $usuario = $user->id;
+        
         $datasolicitacao = implode('-', array_reverse(explode('/', $this->input->post('dataSolicitacao'))));
-        $dataresolucao = implode('-', array_reverse(explode('/', $this->input->post('dataResolucao'))));
+       
         $data = array(
             'dt_solicitacao' => $datasolicitacao,
-            'dt_resolucao' => $dataresolucao,
             'ds_descricao_chamado' => $this->input->post('descChamado'),
             'ds_observacao' => $this->input->post('descObs'),
-            'ds_nome_solicitante' => strtoupper($this->input->post('nomeSolicitante')),
-            'colaboradores_cd_colaborador' => $this->input->post('responsavel'),
+            'tp_hora' => $this->input->post('horaSolicitacao'),
+            'usuarios_cd_usuario' => $usuario ,
             'unidades_cd_unidade' => $this->input->post('unidade'),
             'setores_cd_setor' => $this->input->post('setor'),
-            'tp_status' => $this->input->post('status'),
+            'status_cd_status' => 1,
             'tp_prioridade' => $this->input->post('prioridade'),
         );
 
@@ -151,6 +156,7 @@ class Chamados extends CI_Controller {
         $this->data['unidades'] = $this->unidades_model->getUnidadesDropdown();
         $this->data['colaboradores'] = $this->colaboradores_model->getColaboradoresDropdown();
         $this->data['results'] = $this->chamados_model->getById($id);
+        $this->data['usuario'] = $this->ion_auth->user()->row();
         $this->load->view('template/header');
         $this->load->view('chamados/editar', $this->data);
         $this->load->view('template/footer');

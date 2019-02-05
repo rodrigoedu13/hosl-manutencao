@@ -22,14 +22,14 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <select class="form-control" name="status" required="">
-                                    <option>Selecione o status</option>
-                                    <option value="1">Aberto</option>
-                                    <option value="2">Em atendimento</option>
-                                    <option value="3">Pendente</option>
-                                    <option value="4">Cancelado</option>
-                                    <option value="5">Finalizado</option>
-                                </select>
+                                <?php
+                                    $js = array(
+                                            'id' => 'status',
+                                            'class' => 'form-control'
+                                        );
+                                    $options = array('' => 'Selecione um status') + $status;
+                                    echo form_dropdown($name = 'status', $options, 0, $js);
+                                    ?>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -38,7 +38,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="dataInicio" class="form-control pull-right" placeholder="Data Inicio" id="datepicker" required="">
+                                    <input type="text" name="dataInicio" class="form-control pull-right" placeholder="Data Inicio" id="datepicker">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -49,7 +49,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="dataFim" class="form-control pull-right" placeholder="Data Fim" id="datepicker2" required="">
+                                    <input type="text" name="dataFim" class="form-control pull-right" placeholder="Data Fim" id="datepicker2">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -128,7 +128,7 @@
                                         <td><?= $r->cd_chamado; ?></td>
                                         <td><?= $r->ds_unidade; ?></td>
                                         <td><?= $r->ds_setor; ?></td>
-                                        <td><?= $r->ds_nome_solicitante; ?></td>
+                                        <td><?= $r->first_name . ' ' . $r->last_name; ?></td>
                                         <td><?= $datasolicitacao; ?></td>
                                         <td><?= $r->ds_colaborador; ?></td>
                                         <td>
@@ -143,24 +143,24 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <?php if ($r->tp_status == 1) { ?>
+                                            <?php if ($r->status_cd_status == 1) { ?>
                                                 <small class="label bg-green">Aberto</small>
                                             <?php } ?>
-                                            <?php if ($r->tp_status == 2) { ?>
+                                            <?php if ($r->status_cd_status == 2) { ?>
                                                 <small class="label bg-gray">Em Atendimento</small>
                                             <?php } ?>
-                                            <?php if ($r->tp_status == 3) { ?>
+                                            <?php if ($r->status_cd_status == 3) { ?>
                                                 <small class="label bg-black-gradient">Pendente</small>
                                             <?php } ?>
-                                            <?php if ($r->tp_status == 4) { ?>
+                                            <?php if ($r->status_cd_status == 4) { ?>
                                                 <small class="label bg-orange">Cancelado</small>
                                             <?php } ?>
-                                            <?php if ($r->tp_status == 5) { ?>
+                                            <?php if ($r->status_cd_status == 5) { ?>
                                                 <small class="label bg-light-blue">Finalizado</small>
                                             <?php } ?>
                                         </td>
                                         <td width="13%">
-                                            <a href="#modal-visualizar" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>" descChamado="<?= $r->ds_descricao_chamado; ?>" descObs="<?= $r->ds_observacao; ?>" style="margin-right: 1%" class="btn btn-sm btn-info visualizar" title="Visualizar Chamado"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo base_url('/chamados/visualizar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-default" title="Visualizar Chamado"><i class="fa fa-eye"></i></a>
                                             <a href="<?php echo base_url('/chamados/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
                                             <a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>"  style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>
                                         </td>
@@ -187,51 +187,7 @@
 </div>
 <!-- /.content -->
 </div>
-<!-- Modal -->
-<div class="modal modal-default fade" id="modal-visualizar">
 
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Visualizar Chamado</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered ">
-                    <thead>
-                    <th>Descrição do Chamado</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <textarea type="text" class="form-control" name="descChamado" rows="5" id="listDescChamado" disabled=""></textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table table-bordered ">
-                    <thead>
-                    <th>Observação do Chamado</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <textarea type="text" class="form-control" name="descObs" rows="5" id="listDescObs" disabled=""></textarea>  
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-
-    <!-- /.modal-dialog -->
-</div>
 <div class="modal modal-danger fade" id="modal-excluir">
     <form action="<?php echo base_url() ?>chamados/excluir" method="post" >
         <div class="modal-dialog">
@@ -261,13 +217,6 @@
             var chamado = $(this).attr('chamado');
             $('#idChamado').val(chamado);
         });
-    });
-
-    $(document).on('click', '.visualizar', function (event) {
-        $("#listDescChamado").val($(this).attr('descChamado'));
-        $("#listDescObs").val($(this).attr('descObs'));
-
-
     });
 
     //Date picker

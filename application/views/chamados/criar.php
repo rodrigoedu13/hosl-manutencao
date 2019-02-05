@@ -38,17 +38,29 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome do Solicitante:<span class="text-red"> *</span></label>
-                                    <input type="text" class="form-control" name="nomeSolicitante" required="" style="text-transform:uppercase">
+                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $usuario->first_name . ' ' . $usuario->last_name;?>" style="text-transform:uppercase" readonly="">
+                                    <input type="hidden" value="<?= $usuario->id;?>" name="id">  
                                 </div>
                                 <!-- /input-group -->
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2">
                                 <div class="form-group">
-                                <label>Responsável:<span class="text-red"> *</span></label>
-                                <?php 
-                                $options = array ('' => 'Selecione um responsável') + $colaboradores;
-                                echo form_dropdown($name = 'responsavel', $options, '' , 'required="" class="form-control" '); ?>
+                                    <label>Data Solicitação:<span class="text-red"> *</span></label>
+
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="dataSolicitacao" class="form-control pull-right" value="<?= date('d/m/Y');?>" id="datepicker" required="">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
                             </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Hora:<span class="text-red"> *</span></label>
+                                    <input type="text" class="form-control" name="horaSolicitacao" required="" value="<?= date('H:i:s');?>">
+                                </div>
                                 <!-- /input-group -->
                             </div>
                         </div>
@@ -77,49 +89,6 @@
                                 </div>
                                 <!-- /input-group -->
                             </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Data Solicitação:<span class="text-red"> *</span></label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" name="dataSolicitacao" class="form-control pull-right" id="datepicker" required="">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Data Resolução:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" name="dataResolucao" class="form-control pull-right" id="datepicker2">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- /.col-lg-6 -->
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Status:<span class="text-red"> *</span></label>
-                                    <select class="form-control" name="status" required="">
-                                        <option value="1">Aberto</option>
-                                        <option value="2">Em atendimento</option>
-                                        <option value="3">Pendente</option>
-                                        <option value="4">Cancelado</option>
-                                        <option value="5">Finalizado</option>
-                                    </select>
-                                </div>
-                                <!-- /input-group -->
-                            </div>
-
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Prioridade:<span class="text-red"> *</span></label>
@@ -131,6 +100,7 @@
                                 </div>
                                 <!-- /input-group -->
                             </div>
+                            
                         </div>
                         <hr>
                         <div class="row">

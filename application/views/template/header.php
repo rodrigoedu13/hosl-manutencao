@@ -151,6 +151,7 @@
                                 <li><a href="<?= base_url('colaboradores') ?>"><i class="fa fa-circle-o"></i> Colaboradores</a></li>
                                 <li><a href="<?= base_url('unidades') ?>"><i class="fa fa-circle-o"></i> Unidades</a></li>
                                 <li><a href="<?= base_url('setores') ?>"><i class="fa fa-circle-o"></i> Setores</a></li>
+                                <li><a href="<?= base_url('status') ?>"><i class="fa fa-circle-o"></i> Status Chamados</a></li>
                                 <li><a href="<?= base_url('auth/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
                             </ul>
                         </li>

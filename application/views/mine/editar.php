@@ -45,22 +45,33 @@ if ($results->dt_resolucao == 0) {
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome do Solicitante:</label>
-                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $results->ds_nome_solicitante; ?>" style="text-transform:uppercase">
-                                    <input type="hidden" value="<?php echo $results->cd_chamado;?>" name="id">
+                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $usuario->first_name . ' ' . $usuario->last_name; ?>" style="text-transform:uppercase">
+                                    <input type="hidden" value="<?php $results->cd_chamado;?>" name="id">
                                 </div>
                                 <!-- /input-group -->
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>Responsável:</label>
-                                    <?php
-                                    $options = array($results->cd_colaborador => $results->ds_colaborador) + $colaboradores;
-                                    echo form_dropdown($name = 'responsavel', $options, 0, 'class="form-control" required=""');
-                                    ?>
+                                    <label>Data Solicitação:</label>
+
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="dataSolicitacao" class="form-control pull-right" id="datepicker" required="" value="<?= $datasolicitacao; ?>">
+                                    </div>
+                                    <!-- /.input group -->
                                 </div>
-                                <!-- /input-group -->
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Hora:</label>
+                                        <input type="text" name="horaSolicitacao" class="form-control pull-right" required="" value="<?= $results->tp_hora; ?>">
+                                    <!-- /.input group -->
+                                </div>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
@@ -88,48 +99,15 @@ if ($results->dt_resolucao == 0) {
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>Data Solicitação:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" name="dataSolicitacao" class="form-control pull-right" id="datepicker" required="" value="<?= $datasolicitacao; ?>">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Data Resolução:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" name="dataResolucao" class="form-control pull-right" id="datepicker2" value="<?= $dataresolucao; ?>">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- /.col-lg-6 -->
-                            <div class="col-lg-3">
-                                <div class="form-group">
                                     <label>Status:</label>
-                                    <select class="form-control" name="status" required="">
-                                        <option value="1" <?=($results->tp_status == '1')?'selected':''?>>Aberto</option>
-                                        <option value="2" <?=($results->tp_status == '2')?'selected':''?>>Em atendimento</option>
-                                        <option value="3" <?=($results->tp_status == '3')?'selected':''?>>Pendente</option>
-                                        <option value="4" <?=($results->tp_status == '4')?'selected':''?>>Cancelado</option>
-                                        <option value="5" <?=($results->tp_status == '5')?'selected':''?>>Finalizado</option>
-                                    </select>
+                                    
+                                    <input type="text" name="status" class="form-control" required="" readonly="" value="<?= $results->ds_status; ?>">
+                                    
                                 </div>
                                 <!-- /input-group -->
                             </div>
 
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Prioridade:</label>
                                     <select class="form-control" name="prioridade" required="">
@@ -140,6 +118,10 @@ if ($results->dt_resolucao == 0) {
                                 </div>
                                 <!-- /input-group -->
                             </div>
+                        </div>
+                        <div class="row">
+                            <!-- /.col-lg-6 -->
+                            
                         </div>
                         <hr>
                         <div class="row">

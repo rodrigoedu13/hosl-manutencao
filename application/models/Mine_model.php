@@ -7,7 +7,7 @@ class Mine_model extends CI_Model {
     }
     
 
-    public function getChamados($table, $fields, $where = '', $perpage = 0, $start = 0, $one = false, $array = 'array', $usuario)
+    public function getChamados($table, $fields, $where = '', $perpage, $start = 0, $one = false, $array = 'array', $usuario)
     {
         
         $this->db->select($fields);
@@ -31,7 +31,7 @@ class Mine_model extends CI_Model {
 
     function count($table,$id) {
         $this->db->where('usuarios_cd_usuario',$id);
-        return $this->db->count_all($table);
+        return $this->db->count_all_results($table);
     }
     
     function insert($table, $data) {
