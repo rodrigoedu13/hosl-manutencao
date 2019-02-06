@@ -59,7 +59,13 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Hora:<span class="text-red"> *</span></label>
-                                    <input type="text" class="form-control" name="horaSolicitacao" required="" value="<?= date('H:i:s');?>">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        <input type="text" class="form-control timepicker" name="horaSolicitacao" required="" value="<?= date('H:i');?>" >
+                                    </div>
+                                    
                                 </div>
                                 <!-- /input-group -->
                             </div>
@@ -150,6 +156,13 @@
         $('#datepicker').datepicker({
             autoclose: true,
         })
+        
+         $('.timepicker').timepicker({
+        showInputs: false,
+        showMeridian: false,
+        template: false
+         })
+
 
         //Date picker2
         $('#datepicker2').datepicker({

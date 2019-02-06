@@ -42,5 +42,25 @@ class Mine_model extends CI_Model {
 
         return FALSE;
     }
+    
+    function delete($table, $fieldID, $ID) {
+        $this->db->where($fieldID, $ID);
+        $this->db->delete($table);
+        if ($this->db->affected_rows() == '1') {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+    
+    function edit($table, $data, $fieldID, $ID) {
+        $this->db->where($fieldID, $ID);
+        $this->db->update($table, $data);
+        if ($this->db->affected_rows() >= 0) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
 
 }

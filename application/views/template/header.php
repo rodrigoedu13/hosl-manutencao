@@ -16,6 +16,8 @@
         <!-- jvectormap -->
         <link rel="stylesheet" href="<?= base_url('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'); ?>">
         <!-- Theme style -->
+        <link rel="stylesheet" href="<?= base_url('assets/plugins/timepicker/bootstrap-timepicker.min.css'); ?>">
+        
         <link rel="stylesheet" href="<?= base_url('assets/dist/css/AdminLTE.min.css'); ?>">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
@@ -46,6 +48,8 @@
         <script src="<?= base_url('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>"></script>
         <!-- ChartJS -->
         <script src="<?= base_url('assets/bower_components/chart.js/Chart.js'); ?>"></script>
+        
+        <script src="<?= base_url('assets/plugins/timepicker/bootstrap-timepicker.min.js'); ?>"></script>
 
         <script src="<?= base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
         <script src="<?= base_url('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.js'); ?>"></script>

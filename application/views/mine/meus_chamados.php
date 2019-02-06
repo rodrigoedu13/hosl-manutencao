@@ -115,7 +115,8 @@
                             <tbody>
                                 <?php
                                 foreach ($results as $r):
-
+                                    
+                                    $horasolicitacao = date(('H:i'), strtotime($r->tp_hora));
                                     if ($r->dt_solicitacao == 0) {
                                         $datasolicitacao = '';
                                     } else {
@@ -129,7 +130,7 @@
                                         <td><?= $r->ds_setor; ?></td>
                                         <td><?= $r->first_name.' '.$r->last_name; ?></td>
                                         <td><?= $datasolicitacao; ?></td>
-                                        <td><?= $r->tp_hora; ?></td>
+                                        <td><?= $horasolicitacao; ?></td>
                                         <td><?= $r->ds_colaborador; ?></td>
                                         <td>
                                             <?php if ($r->tp_prioridade == 1) { ?>
@@ -233,7 +234,7 @@
     <!-- /.modal-dialog -->
 </div>
 <div class="modal modal-danger fade" id="modal-excluir">
-    <form action="<?php echo base_url() ?>chamados/excluir" method="post" >
+    <form action="<?php echo base_url() ?>mine/excluir" method="post" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

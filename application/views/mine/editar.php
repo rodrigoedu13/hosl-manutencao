@@ -45,8 +45,9 @@ if ($results->dt_resolucao == 0) {
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome do Solicitante:</label>
-                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $usuario->first_name . ' ' . $usuario->last_name; ?>" style="text-transform:uppercase">
-                                    <input type="hidden" value="<?php $results->cd_chamado;?>" name="id">
+                                    <input type="text" class="form-control" name="nomeSolicitante" required="" value="<?= $usuario->first_name . ' ' . $usuario->last_name; ?>" style="text-transform:uppercase" readonly="">
+                                    <input type="hidden" value="<?= $results->cd_chamado;?>" name="id">
+                                    <input type="hidden" value="<?= $usuario->id;?>" name="idUsuario"> 
                                 </div>
                                 <!-- /input-group -->
                             </div>
@@ -66,8 +67,12 @@ if ($results->dt_resolucao == 0) {
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Hora:</label>
-                                        <input type="text" name="horaSolicitacao" class="form-control pull-right" required="" value="<?= $results->tp_hora; ?>">
-                                    <!-- /.input group -->
+                                   <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        <input type="text" class="form-control timepicker" name="horaSolicitacao" required="" value="<?= $results->tp_hora;?>" >
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -161,11 +166,7 @@ if ($results->dt_resolucao == 0) {
     $(function () {
         //Initialize Select2 Elements
         $('.select2').select2()
-
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
-
-        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+      
 
         //Date picker
         $('#datepicker').datepicker({
@@ -176,6 +177,12 @@ if ($results->dt_resolucao == 0) {
         $('#datepicker2').datepicker({
             autoclose: true
         })
+        
+        $('.timepicker').timepicker({
+        showInputs: false,
+        showMeridian: false,
+        template: false
+         })
 
 
     })

@@ -12,6 +12,7 @@ class Mine extends CI_Controller {
         }
         
         $this->load->model('mine_model');
+        $this->output->enable_profiler(true);
     
     }
    
@@ -109,6 +110,44 @@ class Mine extends CI_Controller {
         $this->load->view('template/footer');
     }
     
+    public function editarChamado() {
+        
+        $datasolicitacao = implode('-', array_reverse(explode('/', $this->input->post('dataSolicitacao'))));
+        
+        $data = array(
+            'dt_solicitacao' => $datasolicitacao,
+            'tp_hora' => $this->input->post('horaSolicitacao'),
+            'ds_descricao_chamado' => $this->input->post('descChamado'),
+            'ds_observacao' => $this->input->post('descObs'),
+            'usuarios_cd_usuario' => $this->input->post('idUsuario'),
+            'unidades_cd_unidade' => $this->input->post('unidade'),
+            'setores_cd_setor' => $this->input->post('setor'),            
+            'tp_prioridade' => $this->input->post('prioridade'),
+        );
+
+        if ($this->mine_model->edit('chamados', $data, 'cd_chamado', $this->input->post('id')) == TRUE) {
+            $this->session->set_flashdata('success', 'Registro editado com sucesso!');
+            redirect(base_url() . 'mine');
+        } else {
+             $this->session->set_flashdata('error', 'Ocorreu um erro, contate o administrador!');
+            redirect(base_url() . 'mine');
+        }
+    }
+    
+    public function excluir() {
+
+        $id = $this->input->post('id');
+
+        if ($id == null) {
+            $this->session->set_flashdata('error', 'Erro ao tentar excluir registro.');
+            redirect(site_url() . 'chamados');
+        }
+
+        $this->mine_model->delete('chamados', 'cd_chamado', $id);
+        $this->session->set_flashdata('success', 'Registro excluido com sucesso!');
+        redirect(site_url() . 'mine');
+    }
+    
     public function visualizar() {
 
         $id = $this->uri->segment(3);
@@ -125,5 +164,7 @@ class Mine extends CI_Controller {
         $this->load->view('mine/visualizar', $this->data);
         $this->load->view('template/footer');
     }
+    
+    
 
 }
