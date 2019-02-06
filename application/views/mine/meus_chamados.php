@@ -144,21 +144,7 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <?php if ($r->status_cd_status == 1) { ?>
-                                                <small class="label bg-green">Aberto</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 2) { ?>
-                                                <small class="label bg-gray">Em Atendimento</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 3) { ?>
-                                                <small class="label bg-black-gradient">Pendente</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 4) { ?>
-                                                <small class="label bg-orange">Cancelado</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 5) { ?>
-                                                <small class="label bg-light-blue">Finalizado</small>
-                                            <?php } ?>
+                                            <small class="label" style="background-color: <?= $r->ds_cor;?>"><?= $r->ds_status;?></small>
                                         </td>
                                         <td width="13%">
                                             <a href="<?php echo base_url('/mine/visualizar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-default visualizar" title="Visualizar Chamado"><i class="fa fa-eye"></i></a>

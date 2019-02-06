@@ -10,6 +10,7 @@ class Chamados_model extends CI_Model {
         $this->db->join('unidades', 'unidades.cd_unidade = chamados.unidades_cd_unidade');
         $this->db->join('setores', 'setores.cd_setor = chamados.setores_cd_setor');
         $this->db->join('users', 'chamados.usuarios_cd_usuario = users.id', 'left');
+        $this->db->join('status', 'status.cd_status = chamados.status_cd_status');
         $this->db->join('colaboradores', 'colaboradores.cd_colaborador = chamados.colaboradores_cd_colaborador','left');
         $this->db->where_not_in('status_cd_status',5);
         $this->db->order_by('cd_chamado','desc');
@@ -28,6 +29,8 @@ class Chamados_model extends CI_Model {
     function getFinalizados($sort = 'cd_chamado', $order ='desc', $limit = null, $offset = null) {
         $this->db->join('unidades', 'unidades.cd_unidade = chamados.unidades_cd_unidade');
         $this->db->join('setores', 'setores.cd_setor = chamados.setores_cd_setor');
+        $this->db->join('users', 'chamados.usuarios_cd_usuario = users.id', 'left');
+        $this->db->join('status', 'status.cd_status = chamados.status_cd_status');
         $this->db->join('colaboradores', 'colaboradores.cd_colaborador = chamados.colaboradores_cd_colaborador');
         $this->db->where('status_cd_status',5);
         $this->db->order_by('cd_chamado','desc');

@@ -32,7 +32,8 @@ class Status extends CI_Controller {
         $id = $this->input->post('codStatus');
         $data = array(
             'cd_status' => $this->input->post('codStatus'),
-            'ds_status' => strtoupper($this->input->post('descStatus'))
+            'ds_status' => strtoupper($this->input->post('descStatus')),
+            'ds_cor' => strtoupper($this->input->post('corStatus'))
         );
 
         if ($this->status_model->getById($id) == true) {
@@ -83,7 +84,8 @@ class Status extends CI_Controller {
 
         $data = array(
             'cd_status' => $this->input->post('codStatus'),
-            'ds_status' => strtoupper($this->input->post('descStatus'))
+            'ds_status' => strtoupper($this->input->post('descStatus')),
+            'ds_cor' => strtoupper($this->input->post('corStatus'))
         );
 
         if ($this->status_model->edit('status', $data, 'cd_status', $this->input->post('id')) == TRUE) {

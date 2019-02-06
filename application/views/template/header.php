@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'); ?>">
         
         <link rel="stylesheet" href="<?= base_url('assets/bower_components/select2/dist/css/select2.min.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'); ?>">
 
         <script src="<?= base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
         <!-- Bootstrap 3.3.7 -->
@@ -50,6 +51,7 @@
         <script src="<?= base_url('assets/bower_components/chart.js/Chart.js'); ?>"></script>
         
         <script src="<?= base_url('assets/plugins/timepicker/bootstrap-timepicker.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'); ?>"></script>
 
         <script src="<?= base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
         <script src="<?= base_url('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.js'); ?>"></script>
@@ -169,9 +171,14 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+                                <?php 
+                                $gruporel = array('usuarios','relatorios');
+                                if ($this->ion_auth->is_admin() || $this->ion_auth->in_group($gruporel)){ ?>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por período</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por responsável</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por unidade</a></li>
+                                <?php } ?>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Chamados por Solicitante</a></li>
                             </ul>
                         </li>
 

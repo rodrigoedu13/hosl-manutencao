@@ -4,7 +4,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="<?= site_url('hosl') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="<?= site_url('mine') ?>">Meus Chamados</a></li>
+        <li><a href="<?= site_url('chamados') ?>">Chamados</a></li>
         <li class="active">Visualizar chamado</li>
 
     </ol>

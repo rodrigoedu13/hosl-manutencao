@@ -12,7 +12,7 @@ class Mine extends CI_Controller {
         }
         
         $this->load->model('mine_model');
-        $this->output->enable_profiler(true);
+//        $this->output->enable_profiler(true);
     
     }
    

@@ -198,5 +198,20 @@ class Chamados extends CI_Controller {
 
         echo $option;
     }
+    
+    public function visualizar(){
+        $id = $this->uri->segment(3);
+
+        if ($id == null) {
+            $this->session->set_flashdata('error', 'Erro ao tentar encontrar registro.');
+            redirect(site_url() . 'mine');
+        }
+        
+        $this->data['usuario'] = $this->ion_auth->user()->row();
+        $this->data['results'] = $this->chamados_model->getById($id);
+        $this->load->view('template/header');
+        $this->load->view('chamados/visualizar', $this->data);
+        $this->load->view('template/footer');
+    }
 
 }

@@ -23,13 +23,13 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <?php
-                                    $js = array(
-                                            'id' => 'status',
-                                            'class' => 'form-control'
-                                        );
-                                    $options = array('' => 'Selecione um status') + $status;
-                                    echo form_dropdown($name = 'status', $options, 0, $js);
-                                    ?>
+                                $js = array(
+                                    'id' => 'status',
+                                    'class' => 'form-control'
+                                );
+                                $options = array('' => 'Selecione um status') + $status;
+                                echo form_dropdown($name = 'status', $options, 0, $js);
+                                ?>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -143,26 +143,23 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <?php if ($r->status_cd_status == 1) { ?>
-                                                <small class="label bg-green">Aberto</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 2) { ?>
-                                                <small class="label bg-gray">Em Atendimento</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 3) { ?>
-                                                <small class="label bg-black-gradient">Pendente</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 4) { ?>
-                                                <small class="label bg-orange">Cancelado</small>
-                                            <?php } ?>
-                                            <?php if ($r->status_cd_status == 5) { ?>
-                                                <small class="label bg-light-blue">Finalizado</small>
-                                            <?php } ?>
+                                            <small class="label" style="background-color: <?= $r->ds_cor; ?>"><?= $r->ds_status; ?></small>
                                         </td>
-                                        <td width="13%">
-                                            <a href="<?php echo base_url('/chamados/visualizar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-default" title="Visualizar Chamado"><i class="fa fa-eye"></i></a>
+                                        <td width="16%">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-default"><i class="fa fa-gear"></i></button>
+                                                <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="<?php echo base_url('/chamados/visualizar/') . $r->cd_chamado; ?>">Visualizar</a></li>
+                                                    <li><a href="#modal-alterarStatus" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>">Alterar Status</a></li>
+                                                </ul>
+                                            </div>
+                                            
                                             <a href="<?php echo base_url('/chamados/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
-                                            <a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>"  style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>
+                                            <!--<a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>"  style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>-->
                                         </td>
 
                                     </tr>
@@ -188,6 +185,31 @@
 <!-- /.content -->
 </div>
 
+<div class="modal modal-default fade" id="modal-alterarStatus">
+    <form action="<?php echo base_url() ?>chamados/alterarStatus" method="post" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Alterar status do Chamado</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline">Excluir</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </form>
+    <!-- /.modal-dialog -->
+</div>
+
 <div class="modal modal-danger fade" id="modal-excluir">
     <form action="<?php echo base_url() ?>chamados/excluir" method="post" >
         <div class="modal-dialog">
@@ -198,7 +220,7 @@
                     <h4 class="modal-title">Excluir Chamado</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="idChamado" name="id" value="" />
+                    <input type="hidden" id="idChamado" name="id" />
                     <h5 style="text-align: center">Deseja realmente excluir este chamado?</h5>
                 </div>
                 <div class="modal-footer">

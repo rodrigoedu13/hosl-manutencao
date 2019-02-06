@@ -31,6 +31,20 @@
                             </div>
                             <!-- /input-group -->
                         </div>
+                        
+                        <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Cor do Status:</label>
+                                    <div class="input-group my-colorpicker1">
+                                        <input type="text" name="corStatus"  value="<?php echo $results->ds_cor;?>" class="form-control">
+
+                                        <div class="input-group-addon">
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
 
                     </div>
                 </div>
@@ -48,3 +62,7 @@
 </section>
 <!-- /.content -->
 </div>
+<script type="text/javascript">
+//Colorpicker
+    $('.my-colorpicker1').colorpicker()
+</script>

@@ -13,28 +13,41 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-danger">
-                <form method="POST" action="<?= base_url('status/add')?>">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label>Código do Status:</label>
-                                <input type="text" class="form-control" name="codStatus" style="text-transform:uppercase">
+                <form method="POST" action="<?= base_url('status/add') ?>">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Código do Status:</label>
+                                    <input type="text" class="form-control" name="codStatus" style="text-transform:uppercase">
+                                </div>
+                                <!-- /input-group -->
                             </div>
-                            <!-- /input-group -->
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Descrição do Status:</label>
-                                <input type="text" class="form-control" name="descStatus" style="text-transform:uppercase">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Descrição do Status:</label>
+                                    <input type="text" class="form-control" name="descStatus" style="text-transform:uppercase">
+                                </div>
+                                <!-- /input-group -->
                             </div>
-                            <!-- /input-group -->
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Cor do Status:</label>
+                                    <div class="input-group my-colorpicker1">
+                                        <input type="text" name="corStatus" class="form-control">
+
+                                        <div class="input-group-addon">
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
-                </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
+                    </div>
                 </form>
                 <!-- /.box-body -->
             </div>
@@ -46,3 +59,7 @@
 </section>
 <!-- /.content -->
 </div>
+<script type="text/javascript">
+//Colorpicker
+    $('.my-colorpicker1').colorpicker()
+</script>
