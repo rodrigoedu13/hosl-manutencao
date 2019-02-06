@@ -23,7 +23,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="<?= site_url('hosl') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="<?= site_url('chamados') ?>">Chamados</a></li>
+        <li><a href="<?= site_url('mine') ?>">Meus Chamados</a></li>
         <li class="active">Novo chamado</li>
 
     </ol>
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-danger">
-                <form method="POST" action="<?= base_url('chamados/add') ?>" autocomplete="off">
+                <form method="POST" action="<?= base_url('mine/add') ?>" autocomplete="off">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-lg-6">

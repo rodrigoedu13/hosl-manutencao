@@ -4,8 +4,8 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="<?= site_url('hosl') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="<?= site_url('unidades') ?>">Unidades</a></li>
-        <li class="active">Editar Unidade</li>
+        <li><a href="<?= site_url('status') ?>">Status</a></li>
+        <li class="active">Editar Status</li>
 
     </ol>
 </section>
@@ -13,15 +13,21 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-danger">
-                <form method="POST" action="<?= base_url('unidades/editarUnidade')?>">
+                <form method="POST" action="<?= base_url('status/editarStatus')?>">
                 <div class="box-body">
                     <div class="row">
-                        
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label>Código do Status:</label>
+                                <input type="text" class="form-control" name="codStatus" style="text-transform:uppercase" value="<?php echo $results->cd_status;?>">
+                                <input type="hidden" name="id" value="<?php echo $results->cd_status;?>">
+                            </div>
+                            <!-- /input-group -->
+                        </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Nome do Colaborador:</label>
-                                <input type="text" class="form-control" name="nomeUnidade" value="<?php echo $results->ds_unidade;?>" style="text-transform:uppercase">
-                                <input type="hidden" value="<?php echo $results->cd_unidade;?>" name="id">
+                                <label>Descrição do Status:</label>
+                                <input type="text" class="form-control" name="descStatus" value="<?php echo $results->ds_status;?>" style="text-transform:uppercase">
                             </div>
                             <!-- /input-group -->
                         </div>

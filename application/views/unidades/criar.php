@@ -19,7 +19,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome da unidade:</label>
-                                <input type="text" class="form-control" name="nomeUnidade">
+                                <input type="text" class="form-control" name="nomeUnidade" style="text-transform:uppercase">
                             </div>
                             <!-- /input-group -->
                         </div>
