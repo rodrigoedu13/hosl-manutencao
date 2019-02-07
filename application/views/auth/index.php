@@ -56,6 +56,7 @@
                                         <a href="<?php echo base_url('/auth/activate/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-success" title="Ativar Usuário"><i class="fa fa-check"></i> Ativar</a>
                                         <?php }?>
                                         <a href="<?php echo base_url('/auth/edit_user/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Usuário"><i class="fa fa-pencil"></i></a>
+                                        <a href="<?php echo base_url('/auth/reset_password/') . $user->id; ?>" style="margin-right: 1%" class="btn btn-sm btn-primary" title="Editar Usuário"><i class="fa fa-pencil"></i> Resetar</a>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

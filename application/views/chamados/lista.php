@@ -122,6 +122,11 @@
                                     } else {
                                         $datasolicitacao = date(('d/m/Y'), strtotime($r->dt_solicitacao));
                                     }
+                                    if ($r->dt_previsao == 0) {
+                                        $dataprevisao = '';
+                                    } else {
+                                        $dataprevisao = date(('d/m/Y'), strtotime($r->dt_previsao));
+                                    }
                                     ?>
 
                                     <tr>
@@ -154,10 +159,10 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="<?php echo base_url('/chamados/visualizar/') . $r->cd_chamado; ?>">Visualizar</a></li>
-                                                    <li><a href="#modal-alterarStatus" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>">Alterar Status</a></li>
+                                                    <li><a href="#modal-alterarStatus" class="alterarStatus" data-toggle="modal" codChamado="<?= $r->cd_chamado; ?>" status="<?= $r->cd_status; ?>" dataPrevisao="<?= $dataprevisao; ?>" descObstec="<?= $r->ds_observacao_tecnico; ?>">Alterar Status</a></li>
                                                 </ul>
                                             </div>
-                                            
+
                                             <a href="<?php echo base_url('/chamados/editar/') . $r->cd_chamado; ?>" style="margin-right: 1%" class="btn btn-sm btn-warning" title="Editar Chamado"><i class="fa fa-pencil"></i></a>
                                             <!--<a href="#modal-excluir" role="button" data-toggle="modal" chamado="<?= $r->cd_chamado; ?>"  style="margin-right: 1%" class="btn btn-sm btn-danger" title="Excluir Chamado"><i class="fa fa-trash"></i></a>-->
                                         </td>
@@ -196,12 +201,48 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-2"></div>
+                        <input id="urlAtualEditar" type="hidden" name="urlAtual"  />
+                        <input type="hidden"  id="codChamado" name="id"/>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Status:<span class="text-red"> *</span></label>
+                                <?php
+                                $js = array(
+                                    'id' => 'status',
+                                    'class' => 'form-control',
+                                    'required' => ''
+                                );
+                                $options = array($r->cd_status => $r->ds_status) + $status;
+                                echo form_dropdown($name = 'status', $options, 0, $js);
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Data Previsão:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" name="dataPrevisao" id="dataPrevisao" class="form-control datepicker3 datemask">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
                     </div> 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Observação Tecnica:</label>
+                                <textarea class="form-control" name="descObstec" id="descObstec" rows="5" ></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-outline">Excluir</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Alterar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -241,6 +282,8 @@
         });
     });
 
+
+    $.fn.datepicker.defaults.format = "dd/mm/yyyy";
     //Date picker
     $('#datepicker').datepicker({
         autoclose: true,
@@ -250,5 +293,23 @@
     $('#datepicker2').datepicker({
         autoclose: true
     })
+
+    //Date picker2
+    $('.datepicker3').datepicker({
+        autoclose: true
+    })
+
+
+
+    jQuery(document).ready(function ($) {
+
+        $(document).on('click', '.alterarStatus', function (event) {
+            $("#codChamado").val($(this).attr('codChamado'));
+            $("#status").val($(this).attr('status'));
+            $("#dataPrevisao").val($(this).attr('dataPrevisao'));
+            $("#descObstec").val($(this).attr('descObstec'));
+
+        });
+    });
 
 </script>

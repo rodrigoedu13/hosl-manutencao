@@ -165,6 +165,7 @@ class Chamados extends CI_Controller {
     public function editarChamado() {
         $datasolicitacao = implode('-', array_reverse(explode('/', $this->input->post('dataSolicitacao'))));
         $dataresolucao = implode('-', array_reverse(explode('/', $this->input->post('dataResolucao'))));
+        $dataprevisao = implode('-', array_reverse(explode('/', $this->input->post('dataPrevisao'))));
 
         $data = array(
             'dt_solicitacao' => $datasolicitacao,
@@ -175,7 +176,7 @@ class Chamados extends CI_Controller {
             'colaboradores_cd_colaborador' => $this->input->post('responsavel'),
             'unidades_cd_unidade' => $this->input->post('unidade'),
             'setores_cd_setor' => $this->input->post('setor'),
-            'tp_status' => $this->input->post('status'),
+            'dt_previsao' => $dataprevisao,
             'tp_prioridade' => $this->input->post('prioridade'),
         );
 
@@ -212,6 +213,30 @@ class Chamados extends CI_Controller {
         $this->load->view('template/header');
         $this->load->view('chamados/visualizar', $this->data);
         $this->load->view('template/footer');
+    }
+    
+    public function alterarStatus() {
+        $id = $this->input->post('id');
+        
+        if ($id == null) {
+            $this->session->set_flashdata('error', 'Erro ao tentar encontrar registro.');
+            redirect(site_url() . 'chamados');
+        }
+        
+        $dataprevisao = implode('-', array_reverse(explode('/', $this->input->post('dataPrevisao'))));
+
+        $data = array(
+            'ds_observacao_tecnico' => $this->input->post('descObstec'),
+            'dt_previsao' => $dataprevisao,
+            'status_cd_status' => $this->input->post('status')
+        );
+
+        if ($this->chamados_model->edit('chamados', $data, 'cd_chamado', $id) == TRUE) {
+            $this->session->set_flashdata('success', 'Registro editado com sucesso!');
+            redirect(base_url() . 'chamados');
+        } else {
+            $this->data['custom_error'] = '<div class="form_error"><p>Ocorreu um erro</p></div>';
+        }
     }
 
 }

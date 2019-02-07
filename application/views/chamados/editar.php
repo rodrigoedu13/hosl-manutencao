@@ -34,6 +34,11 @@ if ($results->dt_resolucao == 0) {
 } else {
     $dataresolucao = date(('d/m/Y'), strtotime($results->dt_resolucao));
 }
+if ($results->dt_previsao == 0) {
+    $dataprevisao = '';
+} else {
+    $dataprevisao = date(('d/m/Y'), strtotime($results->dt_previsao));
+}
 ?>
 <section class="content">
     <div class="row">
@@ -55,7 +60,7 @@ if ($results->dt_resolucao == 0) {
                                     <label>Responsável:</label>
                                     <?php
                                     $options = array($results->cd_colaborador => $results->ds_colaborador) + $colaboradores;
-                                    echo form_dropdown($name = 'responsavel', $options, 0, 'class="form-control" required=""');
+                                    echo form_dropdown($name = 'responsavel', $options, 0, 'class="form-control"');
                                     ?>
                                 </div>
                                 <!-- /input-group -->
@@ -107,7 +112,7 @@ if ($results->dt_resolucao == 0) {
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" name="dataPrevisao" class="form-control" id="datepicker2" value="<?= $dataresolucao; ?>">
+                                        <input type="text" name="dataPrevisao" class="form-control" id="datepicker2" value="<?= $dataprevisao; ?>">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
